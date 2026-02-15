@@ -13,10 +13,10 @@
         content="ebook bahasa jepang, download pdf jlpt, bank soal jlpt n3 n4 n5, latihan menulis hiragana, cheat sheet jft basic, modul bahasa jepang pemula, kanji drill pdf, beli materi bahasa jepang">
     <meta name="author" content="Nichijou Japan ID">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://www.nichijoujapan.my.id/">
+    <link rel="canonical" href="https://www.nichijoujapanid.my.id/">
 
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.nichijoujapan.my.id/">
+    <meta property="og:url" content="https://www.nichijoujapanid.my.id/">
     <meta property="og:title" content="Jual Bundle Materi & Latihan Soal Bahasa Jepang (PDF)">
     <meta property="og:description"
         content="Siap lulus ujian? Dapatkan Bank Soal JLPT, Drill Kanji, dan Lembar Latihan Hiragana. Format PDF siap pakai untuk belajar mandiri.">
@@ -26,7 +26,7 @@
     <meta property="og:image:height" content="1080">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://www.nichijoujapan.my.id/">
+    <meta name="twitter:url" content="https://www.nichijoujapanid.my.id/">
     <meta name="twitter:title" content="Nichijou.ID - Pusat Modul Bahasa Jepang Hemat">
     <meta name="twitter:description" content="Download cheat sheet, bank soal JLPT, dan latihan dasar bahasa Jepang.">
     <meta name="twitter:image"
