@@ -4,10 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nichijou Japan ID </title>
+
+    <title>Nichijou Japan ID</title>
+
+    <meta name="description"
+        content="Toko digital modul belajar bahasa Jepang dari nol. Download PDF Bank Soal JLPT N3/N4/N5, Paket Bundle Hiragana, Cheat Sheet JFT Basic, dan latihan Kanji praktis siap cetak. Harga terjangkau mulai Rp10.000.">
+    <meta name="keywords"
+        content="ebook bahasa jepang, download pdf jlpt, bank soal jlpt n3 n4 n5, latihan menulis hiragana, cheat sheet jft basic, modul bahasa jepang pemula, kanji drill pdf, beli materi bahasa jepang">
+    <meta name="author" content="Nichijou Japan ID">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.nichijoujapan.my.id/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.nichijoujapan.my.id/">
+    <meta property="og:title" content="Jual Bundle Materi & Latihan Soal Bahasa Jepang (PDF)">
+    <meta property="og:description"
+        content="Siap lulus ujian? Dapatkan Bank Soal JLPT, Drill Kanji, dan Lembar Latihan Hiragana. Format PDF siap pakai untuk belajar mandiri.">
+    <meta property="og:image"
+        content="https://ik.imagekit.io/nichijoujapanassets/Assets/5aa7007926b4ec31279b4b710a012db6~tplv-tiktokx-cropcenter_1080_1080.jpeg?updatedAt=1770901523076">
+    <meta property="og:image:width" content="1080">
+    <meta property="og:image:height" content="1080">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.nichijoujapan.my.id/">
+    <meta name="twitter:title" content="Nichijou.ID - Pusat Modul Bahasa Jepang Hemat">
+    <meta name="twitter:description" content="Download cheat sheet, bank soal JLPT, dan latihan dasar bahasa Jepang.">
+    <meta name="twitter:image"
+        content="https://ik.imagekit.io/nichijoujapanassets/Assets/5aa7007926b4ec31279b4b710a012db6~tplv-tiktokx-cropcenter_1080_1080.jpeg?updatedAt=1770901523076">
+
     <link rel="shortcut icon"
         href="https://ik.imagekit.io/nichijoujapanassets/Assets/5aa7007926b4ec31279b4b710a012db6~tplv-tiktokx-cropcenter_1080_1080.jpeg"
         type="image/x-icon">
+
     {{-- Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,15 +84,12 @@
         .marquee-track {
             display: flex;
             animation: marquee 6s linear infinite;
-            /* Kecepatan 40s, bisa diatur */
         }
 
-        /* Pause saat di-hover user */
         .hover\:pause-animation:hover {
             animation-play-state: paused;
         }
 
-        /* Helper untuk truncate text HTML dari RichEditor */
         .line-clamp-4 {
             display: -webkit-box;
             -webkit-line-clamp: 4;
@@ -81,8 +106,6 @@
         class="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-md border-b border-indigo-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-
-                {{-- Logo Navbar (Kecil) --}}
                 <a href="{{ route('home') }}" class="flex items-center gap-2 group">
                     <div class="w-9 h-9 flex items-center justify-center text-white font-serif ">
 
