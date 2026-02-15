@@ -301,7 +301,8 @@
             {{-- PRODUCT GRID --}}
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
                 <template x-for="product in displayedProducts" :key="product.id">
-                    <a :href="'/product/' + product.id" class="group block h-full">
+                    {{-- FIX: Menggunakan product.slug (sebelumnya product.id) --}}
+                    <a :href="'/product/' + product.slug" class="group block h-full">
                         <div
                             class="bg-white rounded-2xl p-3 border border-indigo-50 shadow-sm hover:shadow-lg hover:shadow-indigo-100 hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
 

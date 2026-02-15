@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 
 class ProductResource extends Resource
 {
@@ -20,7 +21,20 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->live(onBlur: true) // Live update saat user selesai ketik nama
+                    ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => 
+                        // Auto-fill slug hanya saat create baru
+                        $operation === 'create' ? $set('slug', Str::slug($state)) : null
+                    ),
+
+                // FIELD BARU: SLUG
+                Forms\Components\TextInput::make('slug')
+                    ->required()
+                    ->unique(ignoreRecord: true)
+                    ->helperText('URL Produk (SEO Friendly). Contoh: belajar-kanji-pemula'),
+
                 Forms\Components\Select::make('category')
                     ->options([
                         'PDF' =>'PDF',
@@ -34,35 +48,18 @@ class ProductResource extends Resource
                     ])
                     ->required(),
                 
-                Forms\Components\TextInput::make('price')
-                    ->numeric()
-                    ->prefix('IDR')
-                    ->required(),
-                    
-                // UBAH DISINI: Logic Diskon jadi Persen
-                Forms\Components\TextInput::make('discount')
-                    ->numeric()
-                    ->label('Diskon (%)') // Label jelas
-                    ->suffix('%')         // Tambah simbol persen
-                    ->maxValue(100)       // Validasi maksimal 100%
-                    ->minValue(0)
-                    ->default(0),
+                Forms\Components\TextInput::make('price')->numeric()->prefix('IDR')->required(),
+                Forms\Components\TextInput::make('discount')->numeric()->label('Diskon (%)')->suffix('%')->maxValue(100)->default(0),
 
                 Forms\Components\TextInput::make('product_link')
-                ->label('Link File Produk (G-Drive/Download)')
-                ->url()
-                ->helperText('Link ini akan dikirim otomatis ke email user setelah order diapprove.')
-                ->columnSpanFull(),
+                    ->label('Link File Produk (G-Drive)')
+                    ->url()
+                    ->columnSpanFull(),
                 
                 Forms\Components\Repeater::make('image_urls')
-                    ->label('Product Images (Gallery)')
+                    ->label('Gallery')
                     ->schema([
-                        Forms\Components\TextInput::make('url')
-                            ->label('Image URL')
-                            ->url()
-                            ->required()
-                            ->placeholder('https://ik.imagekit.io/...')
-                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('url')->label('Image URL')->url()->required()->columnSpanFull(),
                     ])
                     ->grid(2)
                     ->columnSpanFull()
@@ -76,28 +73,14 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('thumbnail_url') 
-                    ->label('Cover')
-                    ->size(50),
-                
+                Tables\Columns\ImageColumn::make('thumbnail_url')->label('Cover')->size(50),
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('sales_count')
-                ->label('Terjual')
-                ->icon('heroicon-m-shopping-bag')
-                ->sortable() // Bisa diurutkan (Best Seller)
-                ->alignCenter()
-                ->badge()
-                ->color('success'),
+                Tables\Columns\TextColumn::make('slug')->label('URL Slug')->color('gray')->limit(20), // Tampilkan slug
+                Tables\Columns\TextColumn::make('sales_count')->label('Terjual')->badge()->color('success'),
                 Tables\Columns\TextColumn::make('category')->badge(),
                 Tables\Columns\TextColumn::make('price')->money('IDR'),
-                
-                
-                // UBAH DISINI: Tampilkan persen
-                Tables\Columns\TextColumn::make('discount')
-                    ->label('Diskon')
-                    ->formatStateUsing(fn ($state) => $state > 0 ? $state . '%' : '-'),
+                Tables\Columns\TextColumn::make('discount')->formatStateUsing(fn ($state) => $state > 0 ? $state . '%' : '-'),
             ])
-            
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
@@ -109,11 +92,7 @@ class ProductResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [];
-    }
-
+    public static function getRelations(): array { return []; }
     public static function getPages(): array
     {
         return [

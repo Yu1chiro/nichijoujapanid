@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
-use App\Models\PaymentMethod; // Import Model PaymentMethod
+use App\Models\PaymentMethod;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -25,8 +25,7 @@ class OrderResource extends Resource
                 Forms\Components\TextInput::make('customer_email')->email()->required()->label('Email Customer'),
                 Forms\Components\TextInput::make('customer_phone')->tel(),
                 
-                // FIX: Gunakan opsi dinamis dari Database PaymentMethod
-                // Agar opsi yang muncul sesuai dengan yang ada di menu Payment Methods
+                // Opsi dinamis dari Database PaymentMethod
                 Forms\Components\Select::make('payment_method')
                     ->label('Metode Pembayaran')
                     ->options(PaymentMethod::query()->pluck('name', 'name')) 
@@ -34,7 +33,7 @@ class OrderResource extends Resource
                     ->required()
                     ->createOptionForm([
                         Forms\Components\TextInput::make('name')->required(),
-                    ]), // Fitur tambahan: Bisa tambah manual jika darurat
+                    ]), 
 
                 Forms\Components\Select::make('status')
                     ->options([
@@ -89,7 +88,7 @@ class OrderResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable(),
                 Tables\Columns\TextColumn::make('customer_name')->searchable(),
-                Tables\Columns\TextColumn::make('payment_method') // Menampilkan nama bank/metode
+                Tables\Columns\TextColumn::make('payment_method')
                     ->label('Metode')
                     ->sortable()
                     ->badge()
@@ -106,7 +105,15 @@ class OrderResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([Tables\Actions\EditAction::make()]);
+            ->actions([
+                Tables\Actions\EditAction::make(),   // Tombol Edit
+                Tables\Actions\DeleteAction::make(), // FIX: Tombol Delete (Hapus)
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(), // FIX: Hapus Banyak Sekaligus (Checkbox)
+                ]),
+            ]);
     }
 
     public static function getRelations(): array

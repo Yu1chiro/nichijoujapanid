@@ -8,19 +8,15 @@ use App\Models\PaymentMethod;
 
 class ProductController extends Controller
 {
-    public function show($id)
+    // Laravel otomatis melakukan 'Implicit Binding' menggunakan Slug
+    // karena kita sudah set getRouteKeyName() di Model Product
+    public function show(Product $product) 
     {
-        // Security: Gunakan findOrFail untuk handling 404 otomatis yang aman
-        // Jika menggunakan Route Model Binding (Product $product), ini sudah otomatis, 
-        // tapi manual query memberikan kontrol lebih jika ingin cek 'is_active'.
-        $product = Product::findOrFail($id);
-
-        // Ambil metode pembayaran aktif saja (Best Practice)
-        // Asumsi ada kolom is_active di PaymentMethod, jika tidak ada, ambil semua.
         $paymentMethods = PaymentMethod::all(); 
         
-        // LOGIKA: Ambil 4 produk terbaru selain produk ini
+        // Ambil produk lain di kategori yang sama, kecuali produk ini
         $relatedProducts = Product::where('id', '!=', $product->id)
+            ->where('category', $product->category) 
             ->latest() 
             ->take(4)  
             ->get();
