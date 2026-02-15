@@ -14,8 +14,8 @@ class Product extends Model
         'discount',
         'description',
         'image_urls',
-        'sales_count', // Field baru untuk fitur best seller
-        // Tambahkan field lain sesuai migration Anda (misal: 'stock', 'is_active', 'features')
+        'sales_count', 
+        'product_link', // <--- FIX: Ditambahkan agar link G-Drive tersimpan
     ];
 
     protected $casts = [

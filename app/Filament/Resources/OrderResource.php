@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
-use App\Services\ImageKitService;
+use App\Models\PaymentMethod; // Import Model PaymentMethod
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -24,12 +24,18 @@ class OrderResource extends Resource
                 Forms\Components\TextInput::make('customer_name')->required(),
                 Forms\Components\TextInput::make('customer_email')->email()->required()->label('Email Customer'),
                 Forms\Components\TextInput::make('customer_phone')->tel(),
+                
+                // FIX: Gunakan opsi dinamis dari Database PaymentMethod
+                // Agar opsi yang muncul sesuai dengan yang ada di menu Payment Methods
                 Forms\Components\Select::make('payment_method')
-                    ->options([
-                        'qris' => 'QRIS',
-                        'mbanking' => 'M-Banking',
-                    ])
-                    ->required(),
+                    ->label('Metode Pembayaran')
+                    ->options(PaymentMethod::query()->pluck('name', 'name')) 
+                    ->searchable()
+                    ->required()
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('name')->required(),
+                    ]), // Fitur tambahan: Bisa tambah manual jika darurat
+
                 Forms\Components\Select::make('status')
                     ->options([
                         'pending' => 'Pending',
@@ -41,7 +47,6 @@ class OrderResource extends Resource
             ]),
 
             Forms\Components\Section::make('Payment Proof')->schema([
-                // CUSTOM COMPONENT: Menerima Base64 dari JS
                 ViewField::make('payment_proof')->view('filament.forms.components.image-kit-uploader')->label('Upload Bukti Transfer'),
             ]),
 
@@ -62,7 +67,6 @@ class OrderResource extends Resource
                                 }
                             }),
 
-                        // Hidden fields untuk snapshot data
                         Forms\Components\TextInput::make('product_name')->required(),
                         Forms\Components\TextInput::make('product_price')->numeric()->readOnly(),
                         Forms\Components\TextInput::make('qty')
@@ -85,6 +89,11 @@ class OrderResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable(),
                 Tables\Columns\TextColumn::make('customer_name')->searchable(),
+                Tables\Columns\TextColumn::make('payment_method') // Menampilkan nama bank/metode
+                    ->label('Metode')
+                    ->sortable()
+                    ->badge()
+                    ->color('gray'),
                 Tables\Columns\BadgeColumn::make('status')->colors([
                     'warning' => 'pending',
                     'success' => 'confirmed',

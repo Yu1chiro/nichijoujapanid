@@ -58,19 +58,20 @@ class CheckoutController extends Controller
     {
         // 1. Validation & Sanitization
         $validated = $request->validate([
-            'product_id' => 'required|integer|exists:products,id', // Pastikan integer
-            'customer_name' => 'required|string|max:100|regex:/^[a-zA-Z\s\.\']*$/', // Regex diperketat (allow titik/petik untuk nama)
-            'customer_email' => 'required|email:filter|max:255', // email:filter menggunakan validasi DNS check
+            'product_id' => 'required|integer|exists:products,id',
+            'customer_name' => 'required|string|max:100|regex:/^[a-zA-Z\s\.\']*$/',
+            'customer_email' => 'required|email:filter|max:255',
             'customer_phone' => 'required|numeric|digits_between:10,15',
-            'payment_method' => 'required|in:qris,mbanking',
-            'payment_proof_url' => 'required|url', // Pastikan format URL valid
+            // FIX: Ubah validasi agar menerima Nama Payment Method (String) bukan cuma qris/mbanking
+            'payment_method' => 'required|string|max:100', 
+            'payment_proof_url' => 'required|url',
         ]);
 
         // Security: Sanitasi Input (XSS Prevention)
         $cleanName = strip_tags($validated['customer_name']);
+        $cleanPaymentMethod = strip_tags($validated['payment_method']); // Sanitasi payment method
 
         // 2. Idempotency Key (Rate Limiting Logic)
-        // Menggunakan IP dan User Agent untuk fingerprinting yang lebih unik
         $fingerprint = md5($request->ip() . $request->userAgent() . $validated['customer_phone']);
         $idempotencyKey = 'order_lock_' . $fingerprint;
 
@@ -78,19 +79,13 @@ class CheckoutController extends Controller
             return back()->withErrors(['error' => 'Transaksi sedang diproses. Mohon tunggu sebentar.']);
         }
 
-        // Lock selama 15 detik (sedikit diperlama untuk keamanan DB)
+        // Lock selama 15 detik
         Cache::put($idempotencyKey, true, 15);
 
         try {
-            return DB::transaction(function () use ($validated, $cleanName, $idempotencyKey) {
+            return DB::transaction(function () use ($validated, $cleanName, $cleanPaymentMethod, $idempotencyKey) {
                 // 3. Race Condition Handling (Pessimistic Locking)
-                // Mengunci baris produk di DB agar stok/harga tidak berubah saat proses ini berjalan
                 $product = Product::where('id', $validated['product_id'])->lockForUpdate()->firstOrFail();
-
-                // Logic Tambahan: Cek apakah produk aktif (Best Practice)
-                // Asumsi ada field is_active, jika tidak ada bisa diabaikan, 
-                // tapi ini penting agar produk yang di-disable admin tidak bisa dibeli via API.
-                // if (!$product->is_active) abort(404); 
 
                 // 4. Kalkulasi Server-Side (Trust No Client Input)
                 $discountPercentage = $product->discount ?? 0;
@@ -101,10 +96,10 @@ class CheckoutController extends Controller
 
                 // 5. Create Order
                 $order = Order::create([
-                    'customer_name' => $cleanName, // Gunakan nama yang sudah disanitasi
+                    'customer_name' => $cleanName,
                     'customer_email' => $validated['customer_email'],
                     'customer_phone' => $validated['customer_phone'],
-                    'payment_method' => $validated['payment_method'],
+                    'payment_method' => $cleanPaymentMethod, // Simpan Nama Bank/Method yang dipilih
                     'payment_proof' => $validated['payment_proof_url'], 
                     'total_price' => $subtotal, 
                     'status' => 'pending', 
@@ -123,7 +118,6 @@ class CheckoutController extends Controller
                 ]);
 
                 // === LOGIC BARU (SALES COUNTER) ===
-                // Increment sales_count secara atomik untuk fitur "Best Seller" di Welcome Blade
                 $product->increment('sales_count', $qty);
 
                 return redirect()->route('checkout.success', $order->id);
@@ -131,7 +125,6 @@ class CheckoutController extends Controller
 
         } catch (\Exception $e) {
             // Error Handling & Observability
-            // Log error tanpa mengekspos data sensitif secara penuh
             Log::error("Checkout Failed ID: " . ($validated['product_id'] ?? 'unknown') . " | Error: " . $e->getMessage());
             
             // Release Lock jika gagal
@@ -144,20 +137,17 @@ class CheckoutController extends Controller
     public function success(Order $order)
     {
         // Security: Mencegah ID Enumeration Attack sederhana
-        // Pastikan order ini memang valid (Laravel Route Model Binding sudah handle 404)
-        
         $adminWa = Cache::remember('active_admin_wa', 3600, function () {
             return WhatsappNumber::where('status_active', true)->first();
         });
 
-        // Fallback admin number (Environment variable lebih aman daripada hardcode)
         $adminNumber = $adminWa ? $adminWa->whatsapp_number : ('6281236715460');
         $adminName = $adminWa ? $adminWa->name : 'Admin';
         
-        // Formatting message (Output encoding handled by view/urlencode)
         $message = "Halo {$adminName},\nSaya sudah melakukan pembayaran.\n\n";
         $message .= "Order ID: #{$order->id}\n";
-        $message .= "Nama: " . e($order->customer_name) . "\n"; // e() helper untuk escape HTML entities
+        $message .= "Nama: " . e($order->customer_name) . "\n";
+        $message .= "Metode: " . e($order->payment_method) . "\n"; // Tampilkan metode bayar
         $message .= "Total: Rp " . number_format($order->total_price, 0, ',', '.') . "\n";
         $message .= "Status: Menunggu Konfirmasi";
 

@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $product->name }}
-
-    </title>
+    <title>{{ $product->name }}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,15 +33,11 @@
             border-radius: 10px;
         }
 
-        /* --- TAMBAHAN FIX UNTUK RICH EDITOR (PROSE) --- */
-
-        /* Memberikan jarak antar paragraf agar seperti artikel */
         .prose p {
             margin-bottom: 1.5em;
             line-height: 1.75;
         }
 
-        /* Memperbaiki tampilan List (Bullet points & Numbering) */
         .prose ul {
             list-style-type: disc;
             padding-left: 1.5em;
@@ -56,12 +50,10 @@
             margin-bottom: 1.5em;
         }
 
-        /* Memperbaiki Heading agar tebal dan berjarak */
         .prose h1,
         .prose h2,
         .prose h3 {
             color: #1e293b;
-            /* slate-800 */
             font-weight: 700;
             margin-top: 2em;
             margin-bottom: 0.5em;
@@ -76,7 +68,6 @@
             font-size: 1.25em;
         }
 
-        /* Memperbaiki Blockquote */
         .prose blockquote {
             border-left: 4px solid #e2e8f0;
             padding-left: 1em;
@@ -84,10 +75,8 @@
             color: #64748b;
         }
 
-        /* Memperbaiki Link */
         .prose a {
             color: #4f46e5;
-            /* indigo-600 */
             text-decoration: underline;
         }
     </style>
@@ -156,7 +145,6 @@
                 {{-- RIGHT: DETAILS --}}
                 <div class="p-6 md:p-10 flex flex-col justify-center">
 
-                    {{-- Kategori --}}
                     <div class="mb-3">
                         <span
                             class="inline-flex items-center px-3 py-1 rounded-md text-xs font-bold bg-indigo-50 text-indigo-700 uppercase">
@@ -164,10 +152,8 @@
                         </span>
                     </div>
 
-                    {{-- Judul Produk --}}
                     <h1 class="text-2xl md:text-4xl font-extrabold text-slate-900 mb-2">{{ $product->name }}</h1>
 
-                    {{-- FITUR BARU: Sales Count Badge --}}
                     @if ($product->sales_count > 0)
                         <div class="flex items-center gap-2 mb-6">
                             <div
@@ -181,11 +167,9 @@
                             </div>
                         </div>
                     @else
-                        <div class="mb-4"></div> {{-- Spacer jika belum ada penjualan --}}
+                        <div class="mb-4"></div>
                     @endif
-                    {{-- End Fitur Baru --}}
 
-                    {{-- Harga --}}
                     <div class="flex items-end gap-3 mb-8 border-b border-slate-100 pb-8">
                         <div class="flex flex-col">
                             @if ($product->discount > 0)
@@ -200,12 +184,10 @@
                         </div>
                     </div>
 
-                    {{-- Deskripsi --}}
                     <div class="prose prose-slate prose-sm md:prose-base max-w-none text-slate-600 mb-8">
                         {!! $product->description !!}
                     </div>
 
-                    {{-- Tombol Beli --}}
                     <div x-data @click="$dispatch('open-checkout')" class="hidden md:block w-full">
                         <button
                             class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-lg py-4 rounded-xl shadow-lg transition flex justify-center items-center gap-3 transform hover:-translate-y-1">
@@ -273,7 +255,6 @@
             <div @click.away="openModal = false"
                 class="bg-white w-full md:w-[500px] md:rounded-2xl rounded-t-[2rem] shadow-2xl flex flex-col max-h-[90vh]">
 
-                {{-- Modal Header --}}
                 <div
                     class="px-6 py-4 border-b border-slate-100 flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-[2rem]">
                     <h3 class="text-lg font-bold text-slate-800">Form Pemesanan</h3>
@@ -286,14 +267,12 @@
                     </button>
                 </div>
 
-                {{-- Modal Body --}}
                 <div class="p-6 overflow-y-auto custom-scrollbar">
                     <form action="{{ route('checkout.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <input type="hidden" name="payment_proof_url" x-model="proofUrl">
 
-                        {{-- Product Info --}}
                         <div class="flex items-center gap-4 p-3 bg-slate-50 rounded-xl border border-slate-100 mb-6">
                             <img src="{{ !empty($product->image_urls) ? $product->image_urls[0]['url'] : '' }}"
                                 class="w-16 h-16 rounded-lg object-cover">
@@ -316,7 +295,6 @@
                                 placeholder="Nomor WhatsApp (0812...)"
                                 class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-100 outline-none">
 
-                            {{-- Payment Method Selection --}}
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Metode
                                     Pembayaran</label>
@@ -328,7 +306,6 @@
                                                 'border-indigo-500 bg-indigo-50/50 ring-1 ring-indigo-500' :
                                                 'border-slate-200 hover:border-slate-300'">
                                             <div class="flex items-center gap-3">
-                                                {{-- Icon: Jika QRIS pakai Thumbnail, Jika Bank pakai Icon Generic --}}
                                                 <div
                                                     class="w-10 h-10 bg-white rounded-lg p-1 border border-slate-100 flex items-center justify-center">
                                                     <template x-if="pm.category === 'qris'">
@@ -359,12 +336,10 @@
                                 <input type="hidden" name="payment_method" :value="paymentValue">
                             </div>
 
-                            {{-- PAYMENT DETAILS SECTION (Snippet dari Anda) --}}
                             <div x-show="selectedMethod" x-collapse
                                 class="mt-4 p-4 bg-sky-50 rounded-xl border border-sky-100">
                                 <p class="text-xs text-sky-600 font-bold uppercase mb-2">Silakan Transfer Ke:</p>
 
-                                {{-- 1. TAMPILKAN GAMBAR HANYA JIKA QRIS --}}
                                 <template x-if="selectedMethod?.category === 'qris' && selectedMethod?.thumbnail_url">
                                     <div class="mb-4 flex flex-col items-center">
                                         <a :href="selectedMethod.thumbnail_url" target="_blank"
@@ -381,13 +356,11 @@
                                     </div>
                                 </template>
 
-                                {{-- 2. TAMPILKAN NO REKENING JIKA M-BANKING (Bisa dicopy) --}}
                                 <div
                                     class="flex items-center justify-between bg-white p-3 rounded-lg border border-sky-100 shadow-sm">
                                     <span class="font-mono font-bold text-lg text-slate-800 break-all"
                                         x-text="selectedMethod?.account_number || selectedMethod?.name"></span>
 
-                                    {{-- Tombol Copy --}}
                                     <button type="button"
                                         @click="navigator.clipboard.writeText(selectedMethod?.account_number || selectedMethod?.name); $el.innerText = 'COPIED!'; setTimeout(() => $el.innerText = 'COPY', 2000)"
                                         class="text-xs text-sky-600 font-bold hover:underline ml-2 shrink-0">
@@ -398,7 +371,6 @@
                                     harga.</p>
                             </div>
 
-                            {{-- Upload Proof --}}
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Bukti
                                     Transfer</label>
@@ -454,17 +426,18 @@
                 selectedPaymentIndex: null,
                 proofUrl: '',
                 isUploading: false,
-                agreed: false, // <--- TAMBAHAN 1 (Default belum dicentang)
+                agreed: false,
 
                 get selectedMethod() {
                     return this.selectedPaymentIndex !== null ? this.paymentMethods[this
                         .selectedPaymentIndex] : null;
                 },
                 get paymentValue() {
-                    return this.selectedMethod ? this.selectedMethod.category : '';
+                    // FIX: Mengembalikan NAMA (misal: "BCA") bukan Kategori (misal: "mbanking")
+                    // Agar di database tersimpan nama bank yang spesifik
+                    return this.selectedMethod ? this.selectedMethod.name : '';
                 },
                 get isFormValid() {
-                    // TAMBAHAN 2 (Cek && this.agreed)
                     return this.proofUrl && this.selectedPaymentIndex !== null && !this
                         .isUploading && this.agreed;
                 },
