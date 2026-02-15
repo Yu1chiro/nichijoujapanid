@@ -25,8 +25,9 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
+            ->brandName('Welcome Admin!')
             ->spa()
-            ->path('Welcome Nichijou Japan')
+            ->path('portal')
             ->login()
             ->colors([
                 'primary' => Color::Blue,
