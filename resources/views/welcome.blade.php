@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Nichijou Japan ID</title>
-
+    <meta name="google-site-verification" content="wB4SlSE7Hzc_Niertu9kkWKCh3E32sc1eZlD7Q734xE" />
     <meta name="description"
         content="Toko digital modul belajar bahasa Jepang dari nol. Download PDF Bank Soal JLPT N3/N4/N5, Paket Bundle Hiragana, Cheat Sheet JFT Basic, dan latihan Kanji praktis siap cetak. Harga terjangkau mulai Rp10.000.">
     <meta name="keywords"
