@@ -237,15 +237,17 @@
 
                 {{-- Description --}}
                 <p class="text-white/90 text-sm md:text-base leading-relaxed mb-6">
-                    お知らせ！ようこそ！
+                    お知らせ!
                     <br class="hidden md:block">
-                    Selamat datang di Nichijou Japan ID yuk cari produk favoritmu!
+                    Selamat datang di Nichijou Japan ID Kamu lagi belajar bahasa jepang otodidak? Tenang, kamu sudah
+                    berada di tempat yang tepat! Temukan modul belajar, bank soal JLPT, dan latihan praktis untuk semua
+                    level. Yuk, mulai petualangan belajarmu sekarang!
                 </p>
 
                 {{-- Social Icons --}}
                 <div class="flex items-center justify-center gap-4">
                     {{-- Instagram --}}
-                    <a href="https://instagram.com/username_anda" target="_blank"
+                    <a href="https://instagram.com/nichijoujapan_id" target="_blank"
                         class="w-10 h-10 rounded-full bg-white border border-slate-200 text-slate-600 hover:text-pink-600 hover:border-pink-200 hover:bg-pink-50 flex items-center justify-center transition-all shadow-sm hover:-translate-y-1">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -254,7 +256,7 @@
                     </a>
 
                     {{-- TikTok --}}
-                    <a href="https://tiktok.com/@username_anda" target="_blank"
+                    <a href="https://tiktok.com/@nichijou_japanid" target="_blank"
                         class="w-10 h-10 rounded-full bg-white border border-slate-200 text-slate-600 hover:text-black hover:border-slate-400 hover:bg-slate-50 flex items-center justify-center transition-all shadow-sm hover:-translate-y-1">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -263,7 +265,7 @@
                     </a>
 
                     {{-- Facebook --}}
-                    <a href="https://facebook.com/username_anda" target="_blank"
+                    <a href="https://www.facebook.com/people/Nichijou-Japan-ID/61588133996412/" target="_blank"
                         class="w-10 h-10 rounded-full bg-white border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 flex items-center justify-center transition-all shadow-sm hover:-translate-y-1">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
