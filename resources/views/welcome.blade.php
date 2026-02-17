@@ -83,7 +83,7 @@
 
         .marquee-track {
             display: flex;
-            animation: marquee 6s linear infinite;
+            animation: marquee 9s linear infinite;
         }
 
         .hover\:pause-animation:hover {
