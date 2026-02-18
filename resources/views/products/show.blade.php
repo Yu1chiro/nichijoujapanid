@@ -258,6 +258,7 @@
                 <div
                     class="px-6 py-4 border-b border-slate-100 flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-[2rem]">
                     <h3 class="text-lg font-bold text-slate-800">Form Pemesanan</h3>
+
                     <button @click="openModal = false"
                         class="p-2 bg-slate-50 hover:bg-slate-100 rounded-full text-slate-500">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -274,6 +275,7 @@
                         <input type="hidden" name="payment_proof_url" x-model="proofUrl">
 
                         <div class="flex items-center gap-4 p-3 bg-slate-50 rounded-xl border border-slate-100 mb-6">
+
                             <img src="{{ !empty($product->image_urls) ? $product->image_urls[0]['url'] : '' }}"
                                 class="w-16 h-16 rounded-lg object-cover">
                             <div>
@@ -298,6 +300,12 @@
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Metode
                                     Pembayaran</label>
+                                <p class="text-amber-700 text-xs mb-5">
+                                    *Sebelum <strong>Checkout</strong> silahkan gunakan browser chrome/safari
+                                    untuk upload foto bukti
+                                    transfer untuk mempermudah transaksi kamu!
+
+                                </p>
                                 <div class="grid grid-cols-1 gap-2">
                                     <template x-for="(pm, index) in paymentMethods" :key="index">
                                         <div @click="selectedPaymentIndex = index"
@@ -367,13 +375,15 @@
                                         COPY
                                     </button>
                                 </div>
-                                <p class="text-[10px] text-slate-500 mt-2">*Pastikan nominal transfer sesuai total
-                                    harga.</p>
+                                <p class="text-[10px] text-amber-600 mt-2">*Pastikan nominal transfer sesuai total
+                                    harga segala bentuk pemalsuan dapat kami proses sesuai dengan prosedur</p>
+
                             </div>
 
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Bukti
                                     Transfer</label>
+
                                 <div class="relative">
                                     <input type="file" accept="image/*" @change="uploadImage"
                                         :disabled="isUploading"
@@ -383,8 +393,9 @@
                                             'border-slate-300 hover:border-indigo-400'">
                                         <div x-show="isUploading"
                                             class="text-indigo-600 font-bold text-sm animate-pulse">Mengupload...</div>
-                                        <div x-show="!isUploading && !proofUrl" class="text-sm text-slate-500">Klik
-                                            untuk upload bukti</div>
+                                        <div x-show="!isUploading && !proofUrl" class="text-sm text-slate-500">
+                                            Upload bukti transfer</div>
+
                                         <div x-show="proofUrl"><img :src="proofUrl"
                                                 class="h-24 mx-auto rounded-lg shadow-sm object-cover">
                                             <p class="text-xs text-green-600 font-bold mt-2">Berhasil Diupload!</p>
@@ -409,7 +420,7 @@
                                 class="w-full py-4 rounded-xl font-bold text-lg shadow-lg flex items-center justify-center gap-2"
                                 :class="isFormValid ? 'bg-indigo-600 text-white hover:bg-indigo-700' :
                                     'bg-slate-200 text-slate-400 cursor-not-allowed'">
-                                <span>Konfirmasi Pesanan</span>
+                                <span>Checkout</span>
                             </button>
                         </div>
                     </form>

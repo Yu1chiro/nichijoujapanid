@@ -236,12 +236,12 @@
                 </h1>
 
                 {{-- Description --}}
-                <p class="text-white/90 text-sm md:text-base leading-relaxed mb-6">
+                <p class="text-white/90 text-sm md:text-base leading-relaxed mb-5">
                     お知らせ!
                     <br class="hidden md:block">
                     Selamat datang di Nichijou Japan ID Kamu lagi belajar bahasa jepang otodidak? Tenang, kamu sudah
                     berada di tempat yang tepat! Temukan modul belajar, bank soal JLPT, dan latihan praktis untuk semua
-                    level. Yuk, mulai petualangan belajarmu sekarang!
+                    kebutuhan kamu!
                 </p>
 
                 {{-- Social Icons --}}
