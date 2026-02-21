@@ -27,7 +27,7 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://www.nichijoujapanid.my.id/">
-    <meta name="twitter:title" content="Nichijou.ID - Pusat Modul Bahasa Jepang Hemat">
+    <meta name="twitter:title" content="Nichijou Japan ID - Pusat Modul Bahasa Jepang Hemat">
     <meta name="twitter:description" content="Download cheat sheet, bank soal JLPT, dan latihan dasar bahasa Jepang.">
     <meta name="twitter:image"
         content="https://ik.imagekit.io/nichijoujapanassets/Assets/5aa7007926b4ec31279b4b710a012db6~tplv-tiktokx-cropcenter_1080_1080.jpeg?updatedAt=1770901523076">
@@ -71,25 +71,6 @@
             scrollbar-width: none;
         }
 
-        @keyframes marquee {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .marquee-track {
-            display: flex;
-            animation: marquee 10s linear infinite;
-        }
-
-        .hover\:pause-animation:hover {
-            animation-play-state: paused;
-        }
-
         .line-clamp-4 {
             display: -webkit-box;
             -webkit-line-clamp: 4;
@@ -116,7 +97,7 @@
                     <div class="flex flex-col">
                         <span
                             class="font-serif text-lg font-bold text-indigo-950 tracking-tight leading-none group-hover:text-indigo-600 transition">
-                            Nichijou<span class="text-sky-400">.</span>ID
+                            Nichijou Japan<span class="text-sky-400">.</span>ID
                         </span>
                     </div>
                 </a>
@@ -394,60 +375,61 @@
         </main>
 
     </div>
+
+    {{-- TESTIMONIAL GRID SECTION --}}
     @if ($testimonials->count() > 0)
-        <section class="py-16 bg-white overflow-hidden">
+        <section class="py-16 bg-white overflow-hidden" x-data="testimonialGrid({{ Js::from($testimonials) }})">
             <div class="max-w-7xl mx-auto px-4 mb-10 text-center">
                 <h2 class="text-3xl font-bold text-slate-900">Testimonials</h2>
                 <p class="text-slate-500 mt-2">Apa kata mereka?</p>
             </div>
 
-            <div class="relative w-full">
-                <div class="absolute top-0 left-0 w-24 h-full  z-10">
-                </div>
-                <div class="absolute top-0 right-0 w-24 h-full  z-10">
-                </div>
-
-                <div class="marquee-track flex gap-6 w-max hover:pause-animation">
-                    @foreach (range(1, 2) as $i)
-                        @foreach ($testimonials as $testi)
-                            <div
-                                class="w-[350px] bg-slate-50 border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 flex-shrink-0">
-                                <div class="flex items-center gap-4 mb-4">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-lg">
-                                        {{ substr($testi->name, 0, 1) }}
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-slate-900 text-sm">{{ $testi->name }}</h4>
-                                        <p class="text-xs text-slate-500">{{ $testi->origin }}</p>
-                                    </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <template x-for="testi in displayedTestimonials" :key="testi.id">
+                        <div
+                            class="bg-slate-50 border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-lg"
+                                    x-text="testi.name.substring(0, 1)">
                                 </div>
-
-                                <div class="text-slate-600 text-sm leading-relaxed line-clamp-4 prose prose-indigo">
-                                    {!! $testi->content !!}
-                                </div>
-
-                                <div class="mt-4 pt-4 border-t border-slate-200">
-                                    <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700">
-                                        Produk : {{ $testi->product_purchased }}
-                                    </span>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-sm" x-text="testi.name"></h4>
+                                    <p class="text-xs text-slate-500" x-text="testi.origin"></p>
                                 </div>
                             </div>
-                        @endforeach
-                    @endforeach
+
+                            <div class="text-slate-600 text-sm leading-relaxed line-clamp-4 prose prose-indigo flex-grow"
+                                x-html="testi.content">
+                            </div>
+
+                            <div class="mt-auto pt-4 border-t border-slate-200">
+                                <span
+                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700"
+                                    x-text="'Produk : ' + testi.product_purchased">
+                                </span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                {{-- LOAD MORE BUTTON --}}
+                <div x-show="hasMore" class="mt-12 text-center" x-cloak>
+                    <button @click="loadMore()"
+                        class="inline-flex items-center justify-center px-6 py-3 text-xs font-bold text-indigo-600 transition-all duration-200 bg-indigo-50 rounded-full hover:bg-indigo-100 hover:text-indigo-800">
+                        Load More Testimonials
+                    </button>
                 </div>
             </div>
         </section>
-
-
     @endif
+
     {{-- FOOTER --}}
     <footer class="bg-white border-t border-indigo-50 py-8 mt-auto">
         <div
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
             <div>
-                <p class="font-serif text-base font-bold text-indigo-950">Nichijou.ID</p>
+                <p class="font-serif text-base font-bold text-indigo-950">Nichijou Japan ID</p>
                 <p class="text-xs text-slate-400 mt-1">Japanese aesthetic daily goods.</p>
             </div>
             <p class="text-xs text-slate-400">&copy; {{ date('Y') }} Nichijou Japan ID.</p>
@@ -524,6 +506,25 @@
                         currency: 'IDR',
                         minimumFractionDigits: 0
                     }).format(number);
+                }
+            }
+        }
+
+        function testimonialGrid(allTestimonials) {
+            return {
+                testimonials: allTestimonials,
+                limit: 4,
+
+                get displayedTestimonials() {
+                    return this.testimonials.slice(0, this.limit);
+                },
+
+                get hasMore() {
+                    return this.limit < this.testimonials.length;
+                },
+
+                loadMore() {
+                    this.limit += 4;
                 }
             }
         }
