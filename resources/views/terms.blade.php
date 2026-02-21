@@ -3,254 +3,116 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Terms & Conditions - Nichijou Japan ID</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions - Nichijou Japan ID</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
-        rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        serif: ['"Playfair Display"', 'serif'],
-                    },
-                    boxShadow: {
-                        'soft': '0 10px 40px -10px rgba(0, 0, 0, 0.05)',
-                        'card': '0 0 0 1px rgba(0,0,0,0.03), 0 2px 8px rgba(0,0,0,0.04)',
-                    },
-                    colors: {
-                        indigo: {
-                            50: '#eef2ff',
-                            600: '#4f46e5',
-                            900: '#312e81',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
         body {
-            background-color: #F8FAFC;
-            color: #334155;
-        }
-
-        .content-card {
-            background: #ffffff;
-            border: 1px solid rgba(226, 232, 240, 0.8);
-        }
-
-        /* Smooth anchor offset for sticky headers if needed */
-        html {
-            scroll-behavior: smooth;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
     </style>
 </head>
 
-<body class="antialiased min-h-screen flex flex-col">
+<body class="bg-gray-50 text-gray-700 antialiased line-height-relaxed">
 
-    <div class="flex-grow py-16 px-4 sm:px-6">
-        <div class="max-w-4xl mx-auto">
+    <main class="max-w-3xl mx-auto px-6 py-16 bg-white my-8 sm:my-12 border border-gray-200 rounded-lg shadow-sm">
 
-            {{-- HEADER SECTION --}}
-            <div class="text-center mb-16 space-y-4">
-                <span
-                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-xs font-bold tracking-widest text-indigo-700 uppercase shadow-sm">
-                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    Official Legal Document
-                </span>
-                <h1 class="font-serif text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">
-                    Terms of Service & Privacy
-                </h1>
-                <div class="h-1.5 w-24 bg-indigo-600 mx-auto rounded-full opacity-80"></div>
-                <p class="text-slate-500 text-sm font-medium">
-                    Effective Date: February 14, 2026
+        <header class="mb-10">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight mb-2">Terms and Conditions</h1>
+            <p class="text-sm text-gray-500">Last Updated: February 2026</p>
+        </header>
+
+        <div class="space-y-8 text-base leading-7">
+
+            <section>
+                <p>
+                    By downloading, accessing, or using digital products from <strong>Nichijou Japan ID</strong>, you
+                    automatically agree to the Terms and Conditions outlined below. These terms are legally binding and
+                    designed to protect Intellectual Property Rights in accordance with applicable copyright laws and
+                    digital regulations (including the ITE Law in the Republic of Indonesia).
                 </p>
-                <p class="max-w-2xl mx-auto text-slate-600 mt-4 leading-relaxed">
-                    Please read these terms carefully. They constitute a legally binding agreement between you and
-                    <strong>Nichijou Japan ID</strong> regarding the use of our digital services and products.
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900 mb-3">1. Personal Use License</h2>
+                <p>
+                    All digital products provided by Nichijou Japan ID are strictly intended for <strong>personal
+                        use</strong> only. All copyrights remain the sole property of Nichijou Japan ID. You are granted
+                    a limited, non-exclusive, and non-transferable license to use this product.
                 </p>
-            </div>
+            </section>
 
-            <div class="space-y-8">
-
-                {{-- 1. INTRO & LEGAL COMPLIANCE (UU ITE FOCUS) --}}
-                <section
-                    class="content-card rounded-2xl p-8 sm:p-10 shadow-soft relative overflow-hidden group hover:shadow-lg transition-all duration-300">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-indigo-600"></div>
-                    <div class="flex items-start gap-4">
-                        <div class="bg-indigo-50 p-3 rounded-lg text-indigo-600 shrink-0">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-3">Legal Compliance & Data
-                                Sovereignty</h2>
-                            <p class="text-slate-600 leading-relaxed mb-4">
-                                Nichijou Japan ID operates in full compliance with applicable laws concerning digital
-                                transactions and data privacy. We are committed to upholding:
-                            </p>
-                            <ul class="space-y-3">
-                                <li
-                                    class="flex items-start gap-3 text-slate-700 bg-slate-50 p-3 rounded-lg border border-slate-100">
-                                    <svg class="w-5 h-5 text-indigo-500 mt-0.5" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-sm"><strong>UU ITE (Law No. 11/2008 & No. 19/2016):</strong>
-                                        Ensuring the legality, validity, and enforceability of all electronic
-                                        transactions and contracts made on this platform.</span>
-                                </li>
-                                <li
-                                    class="flex items-start gap-3 text-slate-700 bg-slate-50 p-3 rounded-lg border border-slate-100">
-                                    <svg class="w-5 h-5 text-indigo-500 mt-0.5" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
-                                        </path>
-                                    </svg>
-                                    <span class="text-sm"><strong>UU PDP (Law No. 27/2022):</strong> Strictly regulating
-                                        the collection, processing, and protection of your Personal Data (PII) to
-                                        prevent misuse or unauthorized access.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                {{-- 2. TRANSACTION SECURITY --}}
-                <section class="content-card rounded-2xl p-8 sm:p-10 shadow-soft">
-                    <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
-                        <span>Transaction Security & Payment</span>
-                    </h2>
-                    <p class="text-slate-600 leading-relaxed mb-4">
-                        We take the security of your financial information seriously. To ensure a safe shopping
-                        experience:
-                    </p>
-                    <ul class="list-disc pl-5 space-y-2 text-slate-600 text-sm">
-                        <li><strong>SSL Encryption:</strong> All data transmitted between your browser and our servers
-                            is encrypted using 256-bit Secure Socket Layer (SSL) technology.</li>
-                        <li><strong>Payment Validation:</strong> We utilize manual and automated verification for
-                            payment proofs (QRIS/Bank Transfer) to prevent fraud and ensure transaction legitimacy.</li>
-                        <li><strong>No Stored Credentials:</strong> We do not store your credit card details or bank
-                            login credentials on our servers. All processing is handled by secure banking protocols.
-                        </li>
-                    </ul>
-                </section>
-
-                {{-- 3. PRIVACY POLICY --}}
-                <section class="content-card rounded-2xl p-8 sm:p-10 shadow-soft">
-                    <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-4">Personal Data Protection Policy
-                    </h2>
-                    <p class="text-slate-600 leading-relaxed mb-4">
-                        In accordance with the <strong>Personal Data Protection Law</strong>, by using our services, you
-                        consent to the collection of specific data (Name, Email, Phone Number) strictly for the purpose
-                        of:
-                    </p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                            <h3 class="font-semibold text-slate-800 mb-2">Collected Data</h3>
-                            <ul class="text-sm text-slate-600 space-y-1">
-                                <li>• Full Legal Name</li>
-                                <li>• Active Email Address</li>
-                                <li>• WhatsApp/Phone Number</li>
-                                <li>• Transaction Proofs</li>
-                            </ul>
-                        </div>
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                            <h3 class="font-semibold text-slate-800 mb-2">Usage Purpose</h3>
-                            <ul class="text-sm text-slate-600 space-y-1">
-                                <li>• Digital Product Delivery</li>
-                                <li>• Transaction Verification</li>
-                                <li>• Customer Support & Updates</li>
-                                <li>• Legal Record Keeping</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-400 mt-4 italic">
-                        *We firmly guarantee that your data will NOT be sold, traded, or transferred to unauthorized
-                        third parties without your explicit consent.
-                    </p>
-                </section>
-
-                {{-- 4. DIGITAL PRODUCT POLICY --}}
-                <section class="content-card rounded-2xl p-8 sm:p-10 shadow-soft">
-                    <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-4">Digital Products & Refund Policy
-                    </h2>
-                    <p class="text-slate-600 leading-relaxed">
-                        Due to the nature of digital goods (downloadable content, access keys, or materials):
-                    </p>
-                    <ul class="mt-4 space-y-2 text-slate-600 text-sm border-l-4 border-indigo-200 pl-4">
-                        <li>1. All sales are considered <strong>final and non-refundable</strong> once the product
-                            access/link has been successfully delivered.</li>
-                        <li>2. Refunds are only applicable if there is a proven technical error on our side that
-                            prevents you from accessing the purchased content.</li>
-                        <li>3. Users are prohibited from redistributing, reselling, or sharing the purchased digital
-                            assets. Violations may result in access termination and legal action under Intellectual
-                            Property Laws.</li>
-                    </ul>
-                </section>
-
-                {{-- 5. DISCLAIMER & CONTACT --}}
-                <section class="grid md:grid-cols-2 gap-8">
-                    <div class="content-card rounded-2xl p-8 shadow-soft">
-                        <h2 class="font-serif text-xl font-semibold text-slate-900 mb-3">Limitation of Liability</h2>
-                        <p class="text-sm text-slate-600 leading-relaxed">
-                            Nichijou Japan ID is not liable for any misuse of products or data resulting from user
-                            negligence (e.g., sharing passwords, using unsecured networks). Users are responsible for
-                            maintaining the confidentiality of their own account access.
-                        </p>
-                    </div>
-                    <div class="content-card rounded-2xl p-8 shadow-soft bg-indigo-900 text-white border-none">
-                        <h2 class="font-serif text-xl font-semibold text-white mb-3">Contact Support</h2>
-                        <p class="text-sm text-indigo-200 mb-4">
-                            Have questions about our terms or security?
-                        </p>
-                        <a href="mailto:nichijoujapan@gmail.com"
-                            class="inline-flex items-center gap-2 text-white font-medium hover:text-indigo-200 transition">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                                </path>
-                            </svg>
-                            nichijoujapan@gmail.com
-                        </a>
-                        <p class="text-xs text-indigo-300 mt-6">
-                            Operating Entity: Nichijou Japan ID<br>
-                            Jurisdiction: Indonesia / Japan
-                        </p>
-                    </div>
-                </section>
-
-            </div>
-
-            {{-- FOOTER --}}
-            <footer class="mt-20 border-t border-slate-200 pt-8 text-center">
-                <p class="text-slate-400 text-xs mb-2">
-                    Protected by reCAPTCHA and Subject to the Google Privacy Policy and Terms of Service.
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900 mb-3">2. Prohibition of Distribution and Modification
+                </h2>
+                <p>
+                    Piracy and illegal distribution are strict violations of the law. You are <strong>strictly
+                        prohibited</strong> from:
                 </p>
-                <p class="text-slate-500 text-sm font-medium">
-                    &copy; 2026 Nichijou Japan ID. All rights reserved.
+                <ul class="list-disc pl-5 mt-2 space-y-2 text-gray-700">
+                    <li>Reselling the digital product in any shape or form.</li>
+                    <li>Sharing access links (whether for free or paid) with third parties.</li>
+                    <li>Modifying, altering, or copying the contents of the product to claim as your own work without
+                        prior written consent from Nichijou Japan ID.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900 mb-3">3. Refund Policy</h2>
+                <p>
+                    Due to the nature of digital products allowing instant access upon purchase, our refund policy is as
+                    follows:
                 </p>
-            </footer>
+                <ul class="list-disc pl-5 mt-2 space-y-2 text-gray-700">
+                    <li><strong>No Refunds</strong> will be issued once our system records that the product link or file
+                        has been successfully delivered and accessed by the user.</li>
+                    <li>Refunds can only be processed in the event of a technical failure where it is proven that the
+                        digital product failed to be delivered to the user's provided email or account.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900 mb-3">4. Social Media Content Usage (YouTube, TikTok,
+                    Instagram)</h2>
+                <p>
+                    We welcome and appreciate users who wish to review or feature our products on social media
+                    platforms. However, to protect the value of our products, the following conditions must be strictly
+                    met:
+                </p>
+                <ul class="list-disc pl-5 mt-2 space-y-2 text-gray-700">
+                    <li><strong>Mandatory Credit:</strong> You must tag, mention, or include a direct link to the
+                        official Nichijou Japan ID account in the video description or post.</li>
+                    <li><strong>Content Display Restriction:</strong> It is strictly prohibited to display the template
+                        or digital product in its entirety, or in such detail that would allow others to replicate the
+                        complete structure of the product.</li>
+                    <li><strong>Link Sharing Ban:</strong> You must not publish the original duplication/download link
+                        in the comments section, description, or your social media bio.</li>
+                </ul>
+                <p class="mt-3 text-sm text-gray-500 bg-gray-50 p-4 rounded border border-gray-100">
+                    Violation of these terms will result in an immediate Copyright Strike or Takedown Notice filed
+                    directly to the respective platform.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900 mb-3">5. Contact Information and Services</h2>
+                <p>
+                    If you have further questions, require a commercial license, or wish to report indications of
+                    copyright infringement regarding our products, please contact our official channels:
+                </p>
+                <ul class="list-none mt-3 space-y-2">
+                    <li><span class="font-medium text-gray-900">Email:</span> <a href="mailto:nichijoujapanid@gmail.com"
+                            class="text-blue-600 hover:underline">nichijoujapanid@gmail.com</a></li>
+                    <li><span class="font-medium text-gray-900">TikTok:</span> <a
+                            href="https://www.tiktok.com/@nichijou_japanid" target="_blank" rel="noopener noreferrer"
+                            class="text-blue-600 hover:underline">@nichijou_japanid</a></li>
+                </ul>
+            </section>
 
         </div>
-    </div>
+    </main>
 
 </body>
 
