@@ -37,6 +37,9 @@ class ProductResource extends Resource
 
                 Forms\Components\Select::make('category')
                     ->options([
+                        'Lainnya'=>'Lainnya',
+                        'Layanan'=>'Layanan',
+                        'Course' => 'Course',
                         'PDF' =>'PDF',
                         'Kanji' =>'Kanji',
                         'Kosakata' =>'Kosakata',
