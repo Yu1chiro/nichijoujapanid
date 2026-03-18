@@ -220,9 +220,11 @@
                 <p class="text-white/90 text-sm md:text-base leading-relaxed mb-5">
                     お知らせ!
                     <br class="hidden md:block">
-                    Selamat datang di Nichijou Japan ID Kamu lagi belajar bahasa jepang otodidak? Tenang, kamu sudah
-                    berada di tempat yang tepat! Temukan modul belajar, bank soal JLPT, dan latihan praktis untuk semua
-                    kebutuhan kamu!
+                    Selamat datang di Nichijou Japan ID.
+                    Kamu lagi belajar bahasa Jepang otodidak? Pas banget di Nichijou Japan ID.
+                    Tersedia beragam modul belajar, bank soal JLPT, dan latihan praktis yang terarah.
+                    Dengan harga yg ramah di kantong serta kualitas materi yg terasa premium.
+                    Karena belajar bahasa Jepang itu ga harus mahal
                 </p>
 
                 {{-- Social Icons --}}
