@@ -377,7 +377,54 @@
         </main>
 
     </div>
+    {{-- ARTICLE SECTION --}}
+    @if ($articles->count() > 0)
+        <section class="py-16 bg-slate-50 border-t border-slate-100" x-data="articleGrid({{ Js::from($articles) }})">
+            <div class="max-w-7xl mx-auto px-4 mb-10 text-center">
+                <h2 class="text-3xl font-bold text-slate-900">Artikel & Insight</h2>
+                <p class="text-slate-500 mt-2">Beberapa artikel menarik dan insight terkini</p>
+            </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <template x-for="article in displayedArticles" :key="article.id">
+                        <a :href="'/article/' + article.slug"
+                            class="group block bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+                            <div class="aspect-video bg-slate-100 overflow-hidden relative">
+                                <template x-if="article.thumbnail_url">
+                                    <img :src="article.thumbnail_url"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                                </template>
+                                <span
+                                    class="absolute top-3 left-3 bg-indigo-600/90 backdrop-blur-sm text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-sm uppercase tracking-widest"
+                                    x-text="article.category"></span>
+                            </div>
+                            <div class="p-5 flex-grow flex flex-col">
+                                <h3 class="font-bold text-slate-800 text-lg mb-2 group-hover:text-indigo-600 line-clamp-2 leading-snug"
+                                    x-text="article.title"></h3>
+                                <div
+                                    class="mt-auto pt-4 flex items-center text-xs font-semibold text-indigo-500 group-hover:text-indigo-700 transition">
+                                    Baca Selengkapnya
+                                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </template>
+                </div>
 
+                {{-- LOAD MORE BUTTON --}}
+                <div x-show="hasMore" class="mt-12 text-center" x-cloak>
+                    <button @click="loadMore()"
+                        class="inline-flex items-center justify-center px-6 py-3 text-xs font-bold text-indigo-600 transition-all duration-200 bg-indigo-50 rounded-full hover:bg-indigo-100 hover:text-indigo-800">
+                        Load More
+                    </button>
+                </div>
+            </div>
+        </section>
+    @endif
     {{-- TESTIMONIAL GRID SECTION --}}
     @if ($testimonials->count() > 0)
         <section class="py-16 bg-white overflow-hidden" x-data="testimonialGrid({{ Js::from($testimonials) }})">
@@ -527,6 +574,22 @@
 
                 loadMore() {
                     this.limit += 4;
+                }
+            }
+        }
+
+        function articleGrid(allArticles) {
+            return {
+                articles: allArticles,
+                limit: 3, // Default 3 artikel
+                get displayedArticles() {
+                    return this.articles.slice(0, this.limit);
+                },
+                get hasMore() {
+                    return this.limit < this.articles.length;
+                },
+                loadMore() {
+                    this.limit += 3; // Tambah 3 artikel saat diklik
                 }
             }
         }
