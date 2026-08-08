@@ -144,6 +144,12 @@
                                 Jika tombol di atas tidak berfungsi, Anda bisa menghubungi kami melalui WhatsApp Admin
                                 untuk bantuan manual.
                             </p>
+                            <p style="margin-top: 10px; font-size: 14px; color: #6b7280;">
+                                Untuk membantu peningkatan layanan Nichijou Japan ID, silakan berikan ulasan terbaik
+                                kamu di link berikut ya! ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧
+                                <a href="https://tally.so/r/2EYYAe" target="_blank"
+                                    style="color: #4f46e5; text-decoration: underline;">Klik di sini</a>
+                            </p>
 
                         </td>
                     </tr>

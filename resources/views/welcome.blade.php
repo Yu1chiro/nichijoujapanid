@@ -284,7 +284,7 @@
             </div>
 
             {{-- PRODUCT GRID --}}
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 lg:gap-8">
                 <template x-for="product in displayedProducts" :key="product.id">
                     {{-- FIX: Menggunakan product.slug (sebelumnya product.id) --}}
                     <a :href="'/product/' + product.slug" class="group block h-full">
