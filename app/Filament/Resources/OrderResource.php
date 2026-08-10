@@ -28,13 +28,13 @@ class OrderResource extends Resource
                 
                 Forms\Components\Select::make('payment_method')
                     ->label('Metode Pembayaran')
-                    ->options(PaymentMethod::query()->pluck('name', 'name')) 
+                    ->options(PaymentMethod::query()->pluck('name', 'name'))
                     ->searchable()
                     ->required()
                     ->createOptionForm([
                         Forms\Components\TextInput::make('name')->required(),
                     ]),
-                    
+                
                 Forms\Components\Select::make('status')
                     ->options([
                         'pending' => 'Pending',
@@ -47,21 +47,6 @@ class OrderResource extends Resource
 
             Forms\Components\Section::make('Payment Proof')->schema([
                 ViewField::make('payment_proof')->view('filament.forms.components.image-kit-uploader')->label('Upload Bukti Transfer'),
-            ]),
-
-            // === FITUR BARU: PILIHAN PENGIRIMAN DI HALAMAN EDIT ===
-            Forms\Components\Section::make('Pengaturan Pengiriman (Saat Status Paid/Confirmed)')->schema([
-                Forms\Components\Select::make('send_via')
-                    ->label('Kirim Akses Produk Via')
-                    ->options([
-                        'email' => 'Hanya Email (Otomatis dari Sistem)',
-                        'wa' => 'Hanya WhatsApp (Membuka Tab Baru)',
-                        'both' => 'Keduanya (Email & WhatsApp)',
-                    ])
-                    ->default('email')
-                    ->dehydrated(false) // Penting agar tidak disave ke DB karena ini hanya trigger logic
-                    ->visibleOn('edit') // Field ini hanya muncul di halaman Edit
-                    ->helperText('Pilih bagaimana link produk dikirim saat Anda klik Simpan.'),
             ]),
 
             Forms\Components\Section::make('Items')->schema([
@@ -142,21 +127,22 @@ class OrderResource extends Resource
                         $text .= "*Tanggal:* {$date}\n";
                         $text .= "*Metode Bayar:* {$record->payment_method}\n";
                         $text .= "=====================\n\n";
+                        
                         $text .= "*RINCIAN PRODUK:*\n";
                         foreach ($record->items as $item) {
                             $productLink = $item->product ? $item->product->product_link : 'Link belum tersedia';
                             $harga = number_format($item->product_price, 0, ',', '.');
                             $text .= "Nama Produk: *{$item->product_name}*\n";
-                            $text .= " ├ Harga : Rp {$harga}\n";
-                            $text .= " ├ Jumlah   : {$item->qty}\n";
-                            $text .= " └ Akses Link : {$productLink}\n\n";
+                            $text .= "   Harga : Rp {$harga}\n";
+                            $text .= "   Jumlah   : {$item->qty}\n";
+                            $text .= "   Akses Link : {$productLink}\n\n";
                         }
+                        
                         $text .= "=====================\n";
                         $text .= "*TOTAL BAYAR: Rp {$totalPrice}*\n";
                         $text .= "=====================\n\n";
-                        $text .= "\nUntuk membantu peningkatan layanan Nichijou Japan ID, silakan berikan ulasan terbaik kamu di link berikut ya! ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧\nhttps://tally.so/r/2EYYAe";
-                        $text .= "\nありがとうございました。日本語の勉強頑張ってください！. 🎌";
-
+                        $text .= "\nUntuk membantu peningkatan layanan Nichijou Japan ID, silakan berikan ulasan terbaik kamu di link berikut ya!  \nhttps://tally.so/r/2EYYAe";
+                        
                         return "https://wa.me/{$phone}?text=" . rawurlencode($text);
                     }),
                 Tables\Actions\EditAction::make(),

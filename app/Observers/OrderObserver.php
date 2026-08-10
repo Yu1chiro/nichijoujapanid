@@ -7,6 +7,7 @@ use App\Mail\OrderApprovedMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use App\Models\Product;
+
 class OrderObserver
 {
     public $afterCommit = true;
@@ -26,12 +27,14 @@ class OrderObserver
             // Cek apakah ada email
             if ($order->customer_email) {
                 try {
+                    // Otomatis kirim email ke customer
                     Mail::to($order->customer_email)->send(new OrderApprovedMail($order));
                     Log::info("Email produk terkirim ke: " . $order->customer_email);
                 } catch (\Exception $e) {
                     Log::error("Gagal mengirim email produk: " . $e->getMessage());
                 }
             }
+
             foreach ($order->items as $item) {
                 // Menggunakan increment() adalah cara Atomic & Thread-safe
                 // Mencegah race condition jika banyak yang beli bersamaan
