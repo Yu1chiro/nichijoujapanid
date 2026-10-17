@@ -9,8 +9,9 @@ class Product extends Model
 {
     protected $fillable = [
         'name',
-        'slug', // <--- Penting: Slug masuk fillable
+        'slug',
         'category',
+        'product_status', // <--- Kolom baru ditambahkan ke fillable
         'price',
         'discount',
         'description',
@@ -55,11 +56,13 @@ class Product extends Model
 
     public function getThumbnailUrlAttribute()
     {
-        $images = $this->image_urls; 
+        $images = $this->image_urls;
+
         if (!empty($images) && is_array($images)) {
             $firstImage = reset($images);
             return $firstImage['url'] ?? 'https://via.placeholder.com/400';
         }
+
         return 'https://via.placeholder.com/400';
     }
 

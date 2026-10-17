@@ -14,7 +14,9 @@ use Illuminate\Support\Str;
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?string $navigationGroup = 'Content';
 
     public static function form(Form $form): Form
@@ -51,7 +53,19 @@ class ProductResource extends Resource
                     ])
                     ->required(),
                 
+                // FIELD BARU: STATUS PRODUK
+                Forms\Components\Select::make('product_status')
+                    ->label('Status Produk')
+                    ->options([
+                        'Terbaru' => 'Terbaru',
+                        'Normal' => 'Normal',
+                        'Terlama' => 'Terlama',
+                    ])
+                    ->default('Normal')
+                    ->required(),
+
                 Forms\Components\TextInput::make('price')->numeric()->prefix('IDR')->required(),
+
                 Forms\Components\TextInput::make('discount')->numeric()->label('Diskon (%)')->suffix('%')->maxValue(100)->default(0),
 
                 Forms\Components\TextInput::make('product_link')
@@ -78,7 +92,18 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('thumbnail_url')->label('Cover')->size(50),
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('slug')->label('URL Slug')->color('gray')->limit(20), // Tampilkan slug
+                Tables\Columns\TextColumn::make('slug')->label('URL Slug')->color('gray')->limit(20),
+                
+                // MENAMPILKAN STATUS PRODUK DI TABEL
+                Tables\Columns\TextColumn::make('product_status')
+                    ->label('Status')
+                    ->badge()
+                    ->colors([
+                        'success' => 'Terbaru',
+                        'warning' => 'Terlama',
+                        'gray' => 'Normal',
+                    ]),
+
                 Tables\Columns\TextColumn::make('sales_count')->label('Terjual')->badge()->color('success'),
                 Tables\Columns\TextColumn::make('category')->badge(),
                 Tables\Columns\TextColumn::make('price')->money('IDR'),
@@ -96,6 +121,7 @@ class ProductResource extends Resource
     }
 
     public static function getRelations(): array { return []; }
+
     public static function getPages(): array
     {
         return [
